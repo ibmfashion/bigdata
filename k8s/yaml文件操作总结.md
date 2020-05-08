@@ -723,4 +723,6 @@ spec:         #必选，Pod中容器的详细定义
 
  sudo mount -t nfs -o vers=4,minorversion=0,noresvport 10.8.32.13:/root/nfs_root  /root/nfsmount
 Jaeger, Prometheus, Kiali, GRAFANA使用指引 https://www.jianshu.com/p/82853ed9bc4a 
+
+python 版本切换 https://blog.csdn.net/fang_chuan/article/details/60958329
  
