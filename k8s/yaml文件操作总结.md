@@ -725,4 +725,8 @@ spec:         #必选，Pod中容器的详细定义
 Jaeger, Prometheus, Kiali, GRAFANA使用指引 https://www.jianshu.com/p/82853ed9bc4a 
 
 python 版本切换 https://blog.csdn.net/fang_chuan/article/details/60958329
+
+# 如果您参考 www.kuboard.cn 提供的文档安装 Kuberenetes，可在第一个 Master 节点上执行此命令
+echo $(kubectl -n kube-system get secret $(kubectl -n kube-system get secret | grep kuboard-user | awk '{print $1}') -o go-template='{{.data.token}}' | base64 -D)
+
  

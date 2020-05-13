@@ -131,7 +131,7 @@ spec:
   capacity:
     storage: 5Gi
   hostPath:
-    path: /tmp/pv0001/
+    path: /Users/pv0001/
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -145,7 +145,7 @@ spec:
   capacity:
     storage: 5Gi
   hostPath:
-    path: /tmp/pv0002/
+    path: /Users/pv0002/
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
