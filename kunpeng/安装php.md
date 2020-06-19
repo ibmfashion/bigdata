@@ -54,3 +54,15 @@
     云社区 博客 博客详情
     “化鲲为鹏，我有话说”基于鲲鹏搭建网站环境wdcp面板篇 https://bbs.huaweicloud.com/blogs/127586
     
+centos 6 系统 
+    echo '12345' > /www/server/panel/data/port.pl && /etc/init.d/bt restart
+    iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 12345 -j ACCEPT
+    service iptables save
+    centos 7 系统 
+    echo '12345' > /www/server/panel/data/port.pl && /etc/init.d/bt restart
+    firewall-cmd --permanent --zone=public --add-port=12345/tcp
+    firewall-cmd --reload
+    以上代码将BT宝塔面板的端口改成了12345，注意：需要使用root用户来改。
+    ————————————————
+    版权声明：本文为CSDN博主「Api - 小柒」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+    原文链接：https://blog.csdn.net/qq15577969/java/article/details/103081789
