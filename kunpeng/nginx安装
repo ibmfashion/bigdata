@@ -1,0 +1,97 @@
+http://mirrors.sohu.com/php/ 镜像下载
+
+https://majunbo.top/20200513/kunpeng09-nginx-install/
+ ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/var/run/nginx.pid --with-pcre-jit --with-http_ssl_module --with-http_v2_module --with-http_sub_module --with-stream --with-stream_ssl_module
+
+#或者：
+[root@web nginx-1.16.1]# ./configure
+....
+Configuration summary
+  + using system PCRE library
+  + OpenSSL library is not used
+  + using system zlib library
+
+  nginx path prefix: "/usr/local/nginx"
+  nginx binary file: "/usr/local/nginx/sbin/nginx"
+  nginx modules path: "/usr/local/nginx/modules"
+  nginx configuration prefix: "/usr/local/nginx/conf"
+  nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+  nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+  nginx error log file: "/usr/local/nginx/logs/error.log"
+  nginx http access log file: "/usr/local/nginx/logs/access.log"
+  nginx http client request body temporary files: "client_body_temp"
+  nginx http proxy temporary files: "proxy_temp"
+  nginx http fastcgi temporary files: "fastcgi_temp"
+  nginx http uwsgi temporary files: "uwsgi_temp"
+  nginx http scgi temporary files: "scgi_temp"
+
+# 最后执行安装：
+[root@web nginx-1.16.1]# make && make install
+or
+[root@web nginx-1.16.1]# make -j24 && make install
+
+
+安装php
+make install
+Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-non-zts-20131226/
+Installing PHP CLI binary:        /usr/local/php/bin/
+Installing PHP CLI man page:      /usr/local/php/php/man/man1/
+Installing PHP FPM binary:        /usr/local/php/sbin/
+Installing PHP FPM config:        /usr/local/php/etc/
+Installing PHP FPM man page:      /usr/local/php/php/man/man8/
+Installing PHP FPM status page:      /usr/local/php/php/php/fpm/
+Installing PHP CGI binary:        /usr/local/php/bin/
+Installing PHP CGI man page:      /usr/local/php/php/man/man1/
+Installing build environment:     /usr/local/php/lib/php/build/
+Installing header files:          /usr/local/php/include/php/
+Installing helper programs:       /usr/local/php/bin/
+  program: phpize
+  program: php-config
+Installing man pages:             /usr/local/php/php/man/man1/
+  page: phpize.1
+  page: php-config.1
+/mnt/php5640/php-5.6.9/build/shtool install -c ext/phar/phar.phar /usr/local/php/bin
+ln -s -f /usr/local/php/bin/phar.phar /usr/local/php/bin/phar
+Installing PDO headers:          /usr/local/php/include/php/ext/pdo/
+[root@ecs-2fd0 php-5.6.9]# /usr/local/php/bin/php
+^C
+[root@ecs-2fd0 php-5.6.9]# /usr/local/php/bin/php -v
+PHP 5.6.9 (cli) (built: Jun 19 2020 10:08:21)
+Copyright (c) 1997-2015 The PHP Group
+Zend Engine v2.6.0, Copyright (c) 1998-2015 Zend Technologies
+
+
+
+yum安装的PHP卸载  https://blog.csdn.net/woshizhangliang999/article/details/56667934
+鲲鹏服务器实验四：PHP7编译安装  https://bbs.huaweicloud.com/forum/thread-56277-1-1.html
+编译移植PHP 7.2.10 - ARM  https://bbs.huaweicloud.com/forum/thread-40831-1-1.html
+将php-fpm添加至service服务 https://blog.csdn.net/yueyecheshou1980/article/details/106096139
+[root@ecs-2fd0 php-5.6.9]# find ./  -name  init.d.php-fpm
+./sapi/fpm/init.d.php-fpm
+[root@ecs-2fd0 php-5.6.9]# cp ./sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
+cp: overwrite ‘/etc/init.d/php-fpm’?
+[root@ecs-2fd0 php-5.6.9]# cp ./sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
+cp: overwrite ‘/etc/init.d/php-fpm’? y
+[root@ecs-2fd0 php-5.6.9]# 　chmod +x /etc/init.d/php-fpm
+-bash: 　chmod: command not found
+[root@ecs-2fd0 php-5.6.9]# chmod +x /etc/init.d/php-fpm
+[root@ecs-2fd0 php-5.6.9]# chkconfig --add php-fpm
+[root@ecs-2fd0 php-5.6.9]# chkconfig php-fpm on
+[root@ecs-2fd0 php-5.6.9]# service php-fpm restart
+
+root@ecs-2fd0 php-5.6.9]# service php-fpm stop
+Gracefully shutting down php-fpm . done
+[root@ecs-2fd0 php-5.6.9]# service php-fpm start
+Starting php-fpm  done
+[root@ecs-2fd0 php-5.6.9]# service php-fpm restart
+Gracefully shutting down php-fpm . done
+Starting php-fpm  done
+
+
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+
+2020/06/19 15:14:01 [notice] 27190#0: signal process started
+2020/06/19 15:14:04 [error] 27192#0: *10 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 113.110.224.78, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "121.37.231.89"
+2020/06/19 15:31:48 [error] 27191#0: *12 open() "/usr/local/nginx/html/cache/global/img/gs.gif" failed (2: No such file or directory), client: 80.82.70.187, server: localhost, request: "GET http://www.baidu.com/cache/global/img/gs.gif HTTP/1.1", host: "www.baidu.com"
+2020/06/19 15:38:02 [error] 27191#0: *13 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 119.3.1.179, server: localhost, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "www.icnwd.com"
