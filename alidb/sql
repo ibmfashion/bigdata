@@ -1,0 +1,27 @@
+CREATE TABLE 'student' (
+ 
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+ 
+  't_id' int(11) NOT NULL,
+ 
+  'name' varchar(20) NOT NULL,
+ 
+  PRIMARY KEY ('id'),
+ 
+  KEY 't_id' ('t_id'),
+ 
+  CONSTRAINT 'student_ibfk_1' FOREIGN KEY ('t_id') REFERENCES 'teacher' ('id')
+ 
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+ 
+ 
+ 
+CREATE TABLE 'teacher' (
+ 
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+ 
+  'name' varchar(20) NOT NULL,
+ 
+  PRIMARY KEY ('id')
+ 
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
