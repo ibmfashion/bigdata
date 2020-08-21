@@ -1,0 +1,24 @@
+class Singleton(object):
+    _instance = None
+    def __new__(self, *args, **kwargs):
+        if self._instance is None:
+            self._instance = object.__new__(self, *args, **kwargs)
+
+        return self._instance
+
+s1 = Singleton()
+s2 = Singleton()
+print(id(s1))
+print(id(s2))
+
+
+public class Singleton {
+　　private static Singleton instance = null;
+　　public static synchronized Singleton getInstance() {
+　　//这个方法比上面有所改进，不用每次都进行生成对象，只是第一次　　　 　
+　　//使用时生成实例，提高了效率！
+　　if (instance==null)
+　　　　instance＝new Singleton();
+       return instance; 　
+　}
+}
